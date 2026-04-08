@@ -15,12 +15,14 @@ from datetime import datetime
 #  PATHS  -  {script_dir}/resources/
 # -------------------------------------------------------------
 
-_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-_RES_DIR = os.path.join(_SCRIPT_DIR, "resources")
-os.makedirs(_RES_DIR, exist_ok=True)
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+# src/tegla_szamolo → src → project root
+PROJECT_ROOT = os.path.dirname(os.path.dirname(SCRIPT_DIR))
+RES_DIR = os.path.join(PROJECT_ROOT, "resources")
+os.makedirs(RES_DIR, exist_ok=True)
 
-CSV_FILE = os.path.join(_RES_DIR, "walls.csv")
-SEGMENT_FILE = os.path.join(_RES_DIR, "segments.csv")
+CSV_FILE = os.path.join(RES_DIR, "walls.csv")
+SEGMENT_FILE = os.path.join(RES_DIR, "segments.csv")
 
 # -------------------------------------------------------------
 #  BRICK SPECIFICATIONS
@@ -540,7 +542,7 @@ def screen_delete_wall(stdscr, walls, segs):
         center_text(stdscr, 1, " \u274c  DELETE WALL ",
                     curses.color_pair(C_TITLE) | curses.A_BOLD)
 
-        hdr = "  {:&lt;28}  {:&gt;4}  {:&gt;8}".format(
+        hdr = "  {:<28}  {:>4}  {:>8}".format(
             "Wall Name", "Segs", "Bricks")
         safe_addstr(stdscr, 3, 2, hdr[:sw - 4],
                     curses.color_pair(C_HEADER) | curses.A_BOLD)
